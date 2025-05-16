@@ -58,7 +58,7 @@ function QuestionOptions() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
-      const apiUrl = `https://opentdb.com/api.php?amount=5&category=${selectedCategory}&difficulty=${difficulty}&type=multiple`;
+      const apiUrl = `https://opentdb.com/api.php?amount=10&category=${selectedCategory}&difficulty=${difficulty}&type=multiple`;
       console.log('API_URL', apiUrl);
       try {
         const response = await fetch(apiUrl);
@@ -177,7 +177,12 @@ function QuestionOptions() {
         </div>
         <br />
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit" className="options-button">Generate Quiz</button>
+        <button
+          type="submit"
+          className="options-button"
+        >
+          Generate Quiz
+        </button>
       </form>
     </div>
   );
