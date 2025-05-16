@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import QuizQuestions from './QuizQuestions';
+import './QuestionOptions.css';
 
 function QuestionOptions() {
   const [username, setUsername] = useState('');
@@ -25,7 +26,7 @@ function QuestionOptions() {
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex((idx) => idx + 1);
     } else {
-      setShowQuiz(false); 
+      setShowQuiz(false);
     }
   };
 
@@ -57,13 +58,13 @@ function QuestionOptions() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (validateForm()) {
-      const apiUrl = `https://opentdb.com/api.php?amount=2&category=${selectedCategory}&difficulty=${difficulty}&type=multiple`;
-      console.log("API_URL", apiUrl)
+      const apiUrl = `https://opentdb.com/api.php?amount=5&category=${selectedCategory}&difficulty=${difficulty}&type=multiple`;
+      console.log('API_URL', apiUrl);
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
         setQuizQuestions(data.results);
-        setShowQuiz(true); 
+        setShowQuiz(true);
       } catch (error) {
         setError('Failed to fetch quiz questions.');
         console.error(error);
@@ -72,10 +73,6 @@ function QuestionOptions() {
   };
 
   const handleRestart = () => {
-    // I think it is because of the default
-    // setUsername(username);
-    // setSelectedCategory(selectedCategory);
-    // setDifficulty(difficulty);
     setQuizQuestions([]);
     setShowQuiz(false);
     setCurrentQuestionIndex(0);
@@ -83,18 +80,16 @@ function QuestionOptions() {
     setAnswerStatus('');
     setScore({ correct: 0, incorrect: 0 });
     setShuffledOptions([]);
- };
-
+  };
 
   useEffect(() => {
-      fetch('https://opentdb.com/api_category.php')
-        .then((response) => response.json())
-        .then((data) => {
-          setCategories(data.trivia_categories);
-        })
-        .catch((error) => console.error('Error fetching categories:', error));
-    },[]);
-
+    fetch('https://opentdb.com/api_category.php')
+      .then((response) => response.json())
+      .then((data) => {
+        setCategories(data.trivia_categories);
+      })
+      .catch((error) => console.error('Error fetching categories:', error));
+  }, []);
 
   useEffect(() => {
     if (showQuiz && quizQuestions.length > 0) {
@@ -104,7 +99,7 @@ function QuestionOptions() {
           ...currentQ.incorrect_answers,
           currentQ.correct_answer,
         ];
-        // Shuffle options
+
         setShuffledOptions(options.sort(() => Math.random() - 0.5));
         setSelectedAnswer('');
         setAnswerStatus('');
@@ -112,25 +107,24 @@ function QuestionOptions() {
     }
   }, [showQuiz, quizQuestions, currentQuestionIndex]);
 
-  // Show quiz questions
   if (showQuiz && quizQuestions.length > 0) {
     return (
       <QuizQuestions
-      quizQuestions={quizQuestions}
-      currentQuestionIndex={currentQuestionIndex}
-      score={score}
-      shuffledOptions={shuffledOptions}
-      selectedAnswer={selectedAnswer}
-      answerStatus={answerStatus}
-      handleOptionSelect={handleOptionSelect}
-      handleNext={handleNext}
-      handleRestart={handleRestart}
-    />
-    ); 
+        quizQuestions={quizQuestions}
+        currentQuestionIndex={currentQuestionIndex}
+        score={score}
+        shuffledOptions={shuffledOptions}
+        selectedAnswer={selectedAnswer}
+        answerStatus={answerStatus}
+        handleOptionSelect={handleOptionSelect}
+        handleNext={handleNext}
+        handleRestart={handleRestart}
+        username={username}
+      />
+    );
   }
 
-  // MARK: This is an example
-  // Otherwise, show the trivia quiz setup form
+  // MARK: example of how to use MARK
   return (
     <div>
       <h2>Customize Trivia Options</h2>
@@ -183,7 +177,7 @@ function QuestionOptions() {
         </div>
         <br />
         {error && <p style={{ color: 'red' }}>{error}</p>}
-        <button type="submit">Generate Quiz</button>
+        <button type="submit" className="options-button">Generate Quiz</button>
       </form>
     </div>
   );
