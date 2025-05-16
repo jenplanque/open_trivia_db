@@ -42,7 +42,7 @@ This project is a mini quiz application built with React and Vite. It uses the [
 
 ## Project Structure
 
-![Project Structure](./src/archives/Project_Structure.png)
+![Project Structure](./src/images/Project_Structure.png)
 
 ---
 
@@ -121,16 +121,16 @@ This project is a mini quiz application built with React and Vite. It uses the [
 ## Screenshots
 
 - **Home Page - Trivia Options Form:**  
-  ![Home Page Form](./src/archives/Homepage.png)
+  ![Home Page Form](./src/images/Homepage.png)
 
 - **Quiz in Progress:**  
   Correct Answer:
-  ![Quiz Questions](./src/archives/Correct_screenshot.png)
+  ![Quiz Questions](./src/images/Correct_screenshot.png)
   Incorrect Answer:
-  ![Quiz Questions](./src/archives/Incorrect_screenshot.png)
+  ![Quiz Questions](./src/images/Incorrect_screenshot.png)
 
 - **Results Section:**  
-  ![Results Section](./src/archives/Results_screenshot.png)
+  ![Results Section](./src/images/Results_screenshot.png)
 
 ---
 
